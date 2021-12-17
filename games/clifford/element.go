@@ -1,3 +1,5 @@
+package clifford
+
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -20,323 +22,322 @@
  * #L%
  */
 
-package clifford
-
 var elements = map[string]rune{
 
-	// Empty space - where the hero can move.
+        // Empty space - where the hero can move.
 
-	"NONE": ' ',
+    "NONE": ' ',
 
-	// A wall where you can shoot a hole.
+        // A wall where you can shoot a hole.
 
-	"BRICK": '#',
+    "BRICK": '#',
 
-	// The wall is restored over time. When the process begins, we
-	// see a timer.
+        // The wall is restored over time. When the process begins, we
+        // see a timer.
 
-	"PIT_FILL_1": '1',
+    "PIT_FILL_1": '1',
 
-	// The wall is restored over time. When the process begins, we
-	// see a timer.
+        // The wall is restored over time. When the process begins, we
+        // see a timer.
 
-	"PIT_FILL_2": '2',
+    "PIT_FILL_2": '2',
 
-	// The wall is restored over time. When the process begins, we
-	// see a timer.
+        // The wall is restored over time. When the process begins, we
+        // see a timer.
 
-	"PIT_FILL_3": '3',
+    "PIT_FILL_3": '3',
 
-	// The wall is restored over time. When the process begins, we
-	// see a timer.
+        // The wall is restored over time. When the process begins, we
+        // see a timer.
 
-	"PIT_FILL_4": '4',
+    "PIT_FILL_4": '4',
 
-	// Indestructible wall - It cannot be destroyed with a shot.
+        // Indestructible wall - It cannot be destroyed with a shot.
 
-	"STONE": '☼',
+    "STONE": '☼',
 
-	// At the moment of the shot, we see the wall like this.
+        // At the moment of the shot, we see the wall like this.
 
-	"CRACK_PIT": '*',
+    "CRACK_PIT": '*',
 
-	// Clue knife. Collect a series of clues to get the maximum
-	// points.
+        // Clue knife. Collect a series of clues to get the maximum
+        // points.
 
-	"CLUE_KNIFE": '$',
+    "CLUE_KNIFE": '$',
 
-	// Clue glove. Collect a series of clues to get the maximum
-	// points.
+        // Clue glove. Collect a series of clues to get the maximum
+        // points.
 
-	"CLUE_GLOVE": '&',
+    "CLUE_GLOVE": '&',
 
-	// Clue ring. Collect a series of clues to get the maximum
-	// points.
+        // Clue ring. Collect a series of clues to get the maximum
+        // points.
 
-	"CLUE_RING": '@',
+    "CLUE_RING": '@',
 
-	// Your hero is dead. In the next tick, it will disappear and
-	// appear in a new location.
+        // Your hero is dead. In the next tick, it will disappear and
+        // appear in a new location.
 
-	"HERO_DIE": 'O',
+    "HERO_DIE": 'O',
 
-	// Your hero is climbing the ladder.
+        // Your hero is climbing the ladder.
 
-	"HERO_LADDER": 'A',
+    "HERO_LADDER": 'A',
 
-	// Your hero runs to the left.
+        // Your hero runs to the left.
 
-	"HERO_LEFT": '◄',
+    "HERO_LEFT": '◄',
 
-	// Your hero runs to the right.
+        // Your hero runs to the right.
 
-	"HERO_RIGHT": '►',
+    "HERO_RIGHT": '►',
 
-	// Your hero is falling.
+        // Your hero is falling.
 
-	"HERO_FALL": 'U',
+    "HERO_FALL": 'U',
 
-	// Your hero is crawling along the pipe.
+        // Your hero is crawling along the pipe.
 
-	"HERO_PIPE": 'I',
+    "HERO_PIPE": 'I',
 
-	// Your hero in the pit.
+        // Your hero in the pit.
 
-	"HERO_PIT": 'E',
+    "HERO_PIT": 'E',
 
-	// Your shadow-hero is dead. In the next tick, it will
-	// disappear and appear in a new location.
+        // Your shadow-hero is dead. In the next tick, it will
+        // disappear and appear in a new location.
 
-	"HERO_MASK_DIE": 'o',
+    "HERO_MASK_DIE": 'o',
 
-	// Your shadow-hero is climbing the ladder.
+        // Your shadow-hero is climbing the ladder.
 
-	"HERO_MASK_LADDER": 'a',
+    "HERO_MASK_LADDER": 'a',
 
-	// Your shadow-hero runs to the left.
+        // Your shadow-hero runs to the left.
 
-	"HERO_MASK_LEFT": 'h',
+    "HERO_MASK_LEFT": 'h',
 
-	// Your shadow-hero runs to the right.
+        // Your shadow-hero runs to the right.
 
-	"HERO_MASK_RIGHT": 'w',
+    "HERO_MASK_RIGHT": 'w',
 
-	// Your shadow-hero is falling.
+        // Your shadow-hero is falling.
 
-	"HERO_MASK_FALL": 'u',
+    "HERO_MASK_FALL": 'u',
 
-	// Your shadow-hero is crawling along the pipe.
+        // Your shadow-hero is crawling along the pipe.
 
-	"HERO_MASK_PIPE": 'i',
+    "HERO_MASK_PIPE": 'i',
 
-	// Your shadow-hero in the pit.
+        // Your shadow-hero in the pit.
 
-	"HERO_MASK_PIT": 'e',
+    "HERO_MASK_PIT": 'e',
 
-	// Other hero is dead. In the next tick, it will disappear and
-	// appear in a new location.
+        // Other hero is dead. In the next tick, it will disappear and
+        // appear in a new location.
 
-	"OTHER_HERO_DIE": 'C',
+    "OTHER_HERO_DIE": 'C',
 
-	// Other hero is climbing the ladder.
+        // Other hero is climbing the ladder.
 
-	"OTHER_HERO_LADDER": 'D',
+    "OTHER_HERO_LADDER": 'D',
 
-	// Other hero runs to the left.
+        // Other hero runs to the left.
 
-	"OTHER_HERO_LEFT": '«',
+    "OTHER_HERO_LEFT": '«',
 
-	// Other hero runs to the right.
+        // Other hero runs to the right.
 
-	"OTHER_HERO_RIGHT": '»',
+    "OTHER_HERO_RIGHT": '»',
 
-	// Other hero is falling.
+        // Other hero is falling.
 
-	"OTHER_HERO_FALL": 'F',
+    "OTHER_HERO_FALL": 'F',
 
-	// Other hero is crawling along the pipe.
+        // Other hero is crawling along the pipe.
 
-	"OTHER_HERO_PIPE": 'J',
+    "OTHER_HERO_PIPE": 'J',
 
-	// Other hero in the pit.
+        // Other hero in the pit.
 
-	"OTHER_HERO_PIT": 'K',
+    "OTHER_HERO_PIT": 'K',
 
-	// Other shadow-hero is dead. In the next tick, it will
-	// disappear and appear in a new location.
+        // Other shadow-hero is dead. In the next tick, it will
+        // disappear and appear in a new location.
 
-	"OTHER_HERO_MASK_DIE": 'c',
+    "OTHER_HERO_MASK_DIE": 'c',
 
-	// Other shadow-hero is climbing the ladder.
+        // Other shadow-hero is climbing the ladder.
 
-	"OTHER_HERO_MASK_LADDER": 'd',
+    "OTHER_HERO_MASK_LADDER": 'd',
 
-	// Other shadow-hero runs to the left.
+        // Other shadow-hero runs to the left.
 
-	"OTHER_HERO_MASK_LEFT": 'Z',
+    "OTHER_HERO_MASK_LEFT": 'Z',
 
-	// Other shadow-hero runs to the right.
+        // Other shadow-hero runs to the right.
 
-	"OTHER_HERO_MASK_RIGHT": 'z',
+    "OTHER_HERO_MASK_RIGHT": 'z',
 
-	// Other shadow-hero is falling.
+        // Other shadow-hero is falling.
 
-	"OTHER_HERO_MASK_FALL": 'f',
+    "OTHER_HERO_MASK_FALL": 'f',
 
-	// Other shadow-hero is crawling along the pipe.
+        // Other shadow-hero is crawling along the pipe.
 
-	"OTHER_HERO_MASK_PIPE": 'j',
+    "OTHER_HERO_MASK_PIPE": 'j',
 
-	// Other shadow-hero in the pit.
+        // Other shadow-hero in the pit.
 
-	"OTHER_HERO_MASK_PIT": 'k',
+    "OTHER_HERO_MASK_PIT": 'k',
 
-	// Enemy hero is dead. In the next tick, it will disappear and
-	// appear in a new location.
+        // Enemy hero is dead. In the next tick, it will disappear and
+        // appear in a new location.
 
-	"ENEMY_HERO_DIE": 'L',
+    "ENEMY_HERO_DIE": 'L',
 
-	// Enemy hero is climbing the ladder.
+        // Enemy hero is climbing the ladder.
 
-	"ENEMY_HERO_LADDER": 'N',
+    "ENEMY_HERO_LADDER": 'N',
 
-	// Enemy hero runs to the left.
+        // Enemy hero runs to the left.
 
-	"ENEMY_HERO_LEFT": 'P',
+    "ENEMY_HERO_LEFT": 'P',
 
-	// Enemy hero runs to the right.
+        // Enemy hero runs to the right.
 
-	"ENEMY_HERO_RIGHT": 'Q',
+    "ENEMY_HERO_RIGHT": 'Q',
 
-	// Enemy hero is falling.
+        // Enemy hero is falling.
 
-	"ENEMY_HERO_FALL": 'R',
+    "ENEMY_HERO_FALL": 'R',
 
-	// Enemy hero is crawling along the pipe.
+        // Enemy hero is crawling along the pipe.
 
-	"ENEMY_HERO_PIPE": 'T',
+    "ENEMY_HERO_PIPE": 'T',
 
-	// Enemy hero in the pit.
+        // Enemy hero in the pit.
 
-	"ENEMY_HERO_PIT": 'V',
+    "ENEMY_HERO_PIT": 'V',
 
-	// Enemy shadow-hero is dead. In the next tick, it will
-	// disappear and appear in a new location.
+        // Enemy shadow-hero is dead. In the next tick, it will
+        // disappear and appear in a new location.
 
-	"ENEMY_HERO_MASK_DIE": 'l',
+    "ENEMY_HERO_MASK_DIE": 'l',
 
-	// Enemy shadow-hero is climbing the ladder.
+        // Enemy shadow-hero is climbing the ladder.
 
-	"ENEMY_HERO_MASK_LADDER": 'n',
+    "ENEMY_HERO_MASK_LADDER": 'n',
 
-	// Enemy shadow-hero runs to the left.
+        // Enemy shadow-hero runs to the left.
 
-	"ENEMY_HERO_MASK_LEFT": 'p',
+    "ENEMY_HERO_MASK_LEFT": 'p',
 
-	// Enemy shadow-hero runs to the right.
+        // Enemy shadow-hero runs to the right.
 
-	"ENEMY_HERO_MASK_RIGHT": 'q',
+    "ENEMY_HERO_MASK_RIGHT": 'q',
 
-	// Enemy shadow-hero is falling.
+        // Enemy shadow-hero is falling.
 
-	"ENEMY_HERO_MASK_FALL": 'r',
+    "ENEMY_HERO_MASK_FALL": 'r',
 
-	// Enemy shadow-hero is crawling along the pipe.
+        // Enemy shadow-hero is crawling along the pipe.
 
-	"ENEMY_HERO_MASK_PIPE": 't',
+    "ENEMY_HERO_MASK_PIPE": 't',
 
-	// Enemy shadow-hero in the pit.
+        // Enemy shadow-hero in the pit.
 
-	"ENEMY_HERO_MASK_PIT": 'v',
+    "ENEMY_HERO_MASK_PIT": 'v',
 
-	// Robber is climbing the ladder.
+        // Robber is climbing the ladder.
 
-	"ROBBER_LADDER": 'X',
+    "ROBBER_LADDER": 'X',
 
-	// Robber runs to the left. Robber picks up the nearest prey
-	// and hunts for it until it overtakes it.
+        // Robber runs to the left. Robber picks up the nearest prey
+        // and hunts for it until it overtakes it.
 
-	"ROBBER_LEFT": ')',
+    "ROBBER_LEFT": ')',
 
-	// Robber runs to the right. Robber picks up the nearest prey
-	// and hunts for it until it overtakes it.
+        // Robber runs to the right. Robber picks up the nearest prey
+        // and hunts for it until it overtakes it.
 
-	"ROBBER_RIGHT": '(',
+    "ROBBER_RIGHT": '(',
 
-	// Robber is falling.
+        // Robber is falling.
 
-	"ROBBER_FALL": 'x',
+    "ROBBER_FALL": 'x',
 
-	// Robber is crawling along the pipe.
+        // Robber is crawling along the pipe.
 
-	"ROBBER_PIPE": 'Y',
+    "ROBBER_PIPE": 'Y',
 
-	// Robber in the pit.
+        // Robber in the pit.
 
-	"ROBBER_PIT": 'y',
+    "ROBBER_PIT": 'y',
 
-	// Opened golden gates. Can only be locked with a golden key.
+        // Opened golden gates. Can only be locked with a golden key.
 
-	"OPENED_DOOR_GOLD": 'g',
+    "OPENED_DOOR_GOLD": 'g',
 
-	// Opened silver gates. Can only be locked with a silver key.
+        // Opened silver gates. Can only be locked with a silver key.
 
-	"OPENED_DOOR_SILVER": 's',
+    "OPENED_DOOR_SILVER": 's',
 
-	// Opened bronze gates. Can only be locked with a bronze key.
+        // Opened bronze gates. Can only be locked with a bronze key.
 
-	"OPENED_DOOR_BRONZE": 'b',
+    "OPENED_DOOR_BRONZE": 'b',
 
-	// Closed golden gates. Can only be opened with a golden key.
+        // Closed golden gates. Can only be opened with a golden key.
 
-	"CLOSED_DOOR_GOLD": 'G',
+    "CLOSED_DOOR_GOLD": 'G',
 
-	// Closed silver gates. Can only be opened with a silver key.
+        // Closed silver gates. Can only be opened with a silver key.
 
-	"CLOSED_DOOR_SILVER": 'S',
+    "CLOSED_DOOR_SILVER": 'S',
 
-	// Closed bronze gates. Can only be opened with a bronze key.
+        // Closed bronze gates. Can only be opened with a bronze key.
 
-	"CLOSED_DOOR_BRONZE": 'B',
+    "CLOSED_DOOR_BRONZE": 'B',
 
-  // Golden key. Helps open/close golden gates. The key can only
-  // be used once.
+        // Golden key. Helps open/close golden gates. The key can only
+        // be used once.
 
-	"KEY_GOLD": '+',
+    "KEY_GOLD": '+',
 
-	// Silver key. Helps open/close silver gates. The key can only
-	// be used once.
+        // Silver key. Helps open/close silver gates. The key can only
+        // be used once.
 
-	"KEY_SILVER": '-',
+    "KEY_SILVER": '-',
 
-	// Bronze key. Helps open/close bronze gates. The key can only
-	// be used once.
+        // Bronze key. Helps open/close bronze gates. The key can only
+        // be used once.
 
-	"KEY_BRONZE": '!',
+    "KEY_BRONZE": '!',
 
-	// Bullet. After the shot by the hero, the bullet flies until
-	// it meets an obstacle. The bullet kills the hero. It
-	// ricochets from the indestructible wall (no more than 1
-	// time). The bullet destroys the destructible wall.
+        // Bullet. After the shot by the hero, the bullet flies until
+        // it meets an obstacle. The bullet kills the hero. It
+        // ricochets from the indestructible wall (no more than 1
+        // time). The bullet destroys the destructible wall.
 
-	"BULLET": '•',
+    "BULLET": '•',
 
-	// Ladder - the hero can move along the level along it.
+        // Ladder - the hero can move along the level along it.
 
-	"LADDER": 'H',
+    "LADDER": 'H',
 
-	// Pipe - the hero can also move along the level along it, but
-	// only horizontally.
+        // Pipe - the hero can also move along the level along it, but
+        // only horizontally.
 
-	"PIPE": '~',
+    "PIPE": '~',
 
-	// Back door - allows the hero to secretly move to another
-	// random place on the map.
+        // Back door - allows the hero to secretly move to another
+        // random place on the map.
 
-	"BACKWAY": 'W',
+    "BACKWAY": 'W',
 
-	// Disguise potion - endow the hero with additional abilities.
-	// The hero goes into shadow mode.
+        // Disguise potion - endow the hero with additional abilities.
+        // The hero goes into shadow mode.
 
-	"MASK_POTION": 'm',
+    "MASK_POTION": 'm',
+
 }
