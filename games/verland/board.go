@@ -90,14 +90,14 @@ func (b *board) findOtherStuff() []*engine.Point {
 func (b *board) countContagions(pt *engine.Point) int {
 	if b.board.IsAt(pt,
 		elements["CLEAR"],
-		elements["ONE_CONTAGION"],
-		elements["TWO_CONTAGIONS"],
-		elements["THREE_CONTAGIONS"],
-		elements["FOUR_CONTAGIONS"],
-		elements["FIVE_CONTAGIONS"],
-		elements["SIX_CONTAGIONS"],
-		elements["SEVEN_CONTAGIONS"],
-		elements["EIGHT_CONTAGIONS"]) {
+		elements["CONTAGION_ONE"],
+		elements["CONTAGION_TWO"],
+		elements["CONTAGION_THREE"],
+		elements["CONTAGION_FOUR"],
+		elements["CONTAGION_FIVE"],
+		elements["CONTAGION_SIX"],
+		elements["CONTAGION_SEVEN"],
+		elements["CONTAGION_EIGHT"]) {
 		return int(b.board.GetAt(pt) - '0')
 	}
 	return 0
