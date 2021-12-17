@@ -82,7 +82,7 @@ func appendIfMissing(slice []*engine.Point, points ...*engine.Point) []*engine.P
 	for _, p := range points {
 		existed := false
 		for _, ele := range slice {
-			if ele == p {
+			if ele.Equal(p) {
 				existed = true
 				break
 			}

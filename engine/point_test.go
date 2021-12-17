@@ -23,8 +23,9 @@
 package engine
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPointsIsValid(t *testing.T) {
@@ -41,4 +42,18 @@ func TestPointsIsValid(t *testing.T) {
 		assert.Equal(t, false, NewPoint(11, 9).IsValid(10))
 		assert.Equal(t, false, NewPoint(9, 11).IsValid(10))
 	})
+}
+
+func TestPointsEqual(t *testing.T) {
+	assert.Equal(t, true, NewPoint(0, 0).Equal(NewPoint(0, 0)))
+	assert.Equal(t, true, NewPoint(3, 5).Equal(NewPoint(3, 5)))
+
+	assert.Equal(t, false, NewPoint(0, 0).Equal(NewPoint(1, 0)))
+	assert.Equal(t, false, NewPoint(0, 0).Equal(NewPoint(0, 1)))
+	assert.Equal(t, false, NewPoint(0, 0).Equal(NewPoint(1, 1)))
+
+	//lint:ignore SA4000 we want to show off how actually Equal works
+	assert.False(t, NewPoint(0, 0) == NewPoint(0, 0))
+	//lint:ignore SA4000 we want to show off how actually Equal works
+	assert.False(t, NewPoint(3, 5) == NewPoint(3, 5))
 }

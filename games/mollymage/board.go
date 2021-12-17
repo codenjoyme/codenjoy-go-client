@@ -95,7 +95,7 @@ func appendIfMissing(slice []*engine.Point, points ...*engine.Point) []*engine.P
 	for _, p := range points {
 		existed := false
 		for _, ele := range slice {
-			if ele == p {
+			if ele.Equal(p) {
 				existed = true
 				break
 			}
@@ -159,12 +159,12 @@ func (b *board) predictBlastsForOneSide(pt *engine.Point, nextStep Move) []*engi
 		}
 		isBarrier := false
 		for _, barrier := range barriers {
-			if barrier == pt {
+			if barrier.Equal(pt) {
 				isBarrier = true
 				break
 			}
 		}
-		if isBarrier == true {
+		if isBarrier {
 			break
 		}
 		points = append(points, pt)
