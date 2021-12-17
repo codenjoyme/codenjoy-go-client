@@ -132,7 +132,7 @@ func (b *board) findPotions() []*engine.Point {
 }
 
 func (b *board) findBlasts() []*engine.Point {
-	return b.board.Find(elements["BOOM"])
+	return b.board.Find(elements["BLAST"])
 }
 
 func (b *board) predictFutureBlasts() []*engine.Point {
