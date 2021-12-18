@@ -1,5 +1,3 @@
-package sokoban
-
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -21,6 +19,8 @@ package sokoban
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
+
+package sokoban
 
 var elements = map[string]rune{
 

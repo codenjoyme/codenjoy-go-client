@@ -1,5 +1,3 @@
-package a2048
-
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -21,6 +19,8 @@ package a2048
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
+
+package a2048
 
 var elements = map[string]rune{
 

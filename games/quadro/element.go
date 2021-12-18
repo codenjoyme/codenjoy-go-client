@@ -1,5 +1,3 @@
-package quadro
-
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -21,6 +19,8 @@ package quadro
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
+
+package quadro
 
 var elements = map[string]rune{
 

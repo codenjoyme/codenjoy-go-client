@@ -1,5 +1,3 @@
-package rubicscube
-
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -21,6 +19,8 @@ package rubicscube
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
+
+package rubicscube
 
 var elements = map[string]rune{
 

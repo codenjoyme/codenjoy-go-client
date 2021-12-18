@@ -1,5 +1,3 @@
-package pong
-
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -21,6 +19,8 @@ package pong
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
+
+package pong
 
 var elements = map[string]rune{
 
