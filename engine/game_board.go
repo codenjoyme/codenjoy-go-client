@@ -26,7 +26,6 @@ import (
     "fmt"
     "math"
     "sort"
-    "reflect"
     "strings"
 )
 
@@ -65,7 +64,7 @@ func (b *GameBoard) AppendIfMissing(slice []*Point, points ...*Point) []*Point {
     for _, p := range points {
         existed := false
         for _, ele := range slice {
-            if reflect.DeepEqual(ele, p) {
+            if ele.Equal(p) {
                 existed = true
                 break
             }

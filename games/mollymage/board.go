@@ -142,7 +142,7 @@ func (b *board) predictBlastsForOneSide(pt *engine.Point, nextStep Move) []*engi
         }
         isBarrier := false
         for _, barrier := range barriers {
-            if barrier == pt {
+            if barrier.Equal(pt) {
                 isBarrier = true
                 break
             }
