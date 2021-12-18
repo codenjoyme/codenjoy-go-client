@@ -25,7 +25,6 @@ package sample
 import (
 	"fmt"
 	"sort"
-
 	"github.com/codenjoyme/codenjoy-go-client/engine"
 )
 
@@ -71,27 +70,11 @@ func (b *board) findOtherHeroes() []*engine.Point {
 
 func (b *board) findBarriers() []*engine.Point {
 	var points []*engine.Point
-	points = appendIfMissing(points, b.findWalls()...)
-	points = appendIfMissing(points, b.findBombs()...)
-	points = appendIfMissing(points, b.findOtherHeroes()...)
+	points = b.board.AppendIfMissing(points, b.findWalls()...)
+	points = b.board.AppendIfMissing(points, b.findBombs()...)
+	points = b.board.AppendIfMissing(points, b.findOtherHeroes()...)
 	sort.Sort(engine.SortedPoints(points))
 	return points
-}
-
-func appendIfMissing(slice []*engine.Point, points ...*engine.Point) []*engine.Point {
-	for _, p := range points {
-		existed := false
-		for _, ele := range slice {
-			if ele == p {
-				existed = true
-				break
-			}
-		}
-		if !existed {
-			slice = append(slice, p)
-		}
-	}
-	return slice
 }
 
 func (b *board) findWalls() []*engine.Point {

@@ -23,10 +23,9 @@
 package mollymage
 
 import (
-	"fmt"
-	"sort"
-
+    "fmt"
 	"github.com/codenjoyme/codenjoy-go-client/engine"
+	"sort"
 )
 
 const BLAST_RANGE int = 3
@@ -81,30 +80,14 @@ func (b *board) findEnemyHeroes() []*engine.Point {
 
 func (b *board) findBarriers() []*engine.Point {
 	var points []*engine.Point
-	points = appendIfMissing(points, b.findWalls()...)
-	points = appendIfMissing(points, b.findGhosts()...)
-	points = appendIfMissing(points, b.findTreasureBoxes()...)
-	points = appendIfMissing(points, b.findPotions()...)
-	points = appendIfMissing(points, b.findOtherHeroes()...)
-	points = appendIfMissing(points, b.findEnemyHeroes()...)
+	points = b.board.AppendIfMissing(points, b.findWalls()...)
+	points = b.board.AppendIfMissing(points, b.findGhosts()...)
+	points = b.board.AppendIfMissing(points, b.findTreasureBoxes()...)
+	points = b.board.AppendIfMissing(points, b.findPotions()...)
+	points = b.board.AppendIfMissing(points, b.findOtherHeroes()...)
+	points = b.board.AppendIfMissing(points, b.findEnemyHeroes()...)
 	sort.Sort(engine.SortedPoints(points))
 	return points
-}
-
-func appendIfMissing(slice []*engine.Point, points ...*engine.Point) []*engine.Point {
-	for _, p := range points {
-		existed := false
-		for _, ele := range slice {
-			if ele == p {
-				existed = true
-				break
-			}
-		}
-		if !existed {
-			slice = append(slice, p)
-		}
-	}
-	return slice
 }
 
 func (b *board) findWalls() []*engine.Point {

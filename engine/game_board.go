@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"math"
 	"sort"
+	"reflect"
 	"strings"
 )
 
@@ -58,6 +59,22 @@ func (b *GameBoard) initElementsArray(supportedElements []rune, rawBoard []rune)
 			panic(fmt.Sprintf("invalid element: %v", nextElement))
 		}
 	}
+}
+
+func (b *GameBoard) AppendIfMissing(slice []*Point, points ...*Point) []*Point {
+	for _, p := range points {
+		existed := false
+		for _, ele := range slice {
+			if reflect.DeepEqual(ele, p) {
+				existed = true
+				break
+			}
+		}
+		if !existed {
+			slice = append(slice, p)
+		}
+	}
+	return slice
 }
 
 func (b *GameBoard) Size() int {
