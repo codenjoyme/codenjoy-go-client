@@ -23,44 +23,44 @@
 package direction
 
 import (
-	"testing"
+    "testing"
 
-	"github.com/stretchr/testify/assert"
+    "github.com/stretchr/testify/assert"
 )
 
 func TestDirectionChangeX(t *testing.T) {
-	assert.Equal(t, 0, Direction{dx: -1}.ChangeX(1))
-	assert.Equal(t, 2, Direction{dx: 1}.ChangeX(1))
-	assert.Equal(t, 1, Direction{dx: 0}.ChangeX(1))
+    assert.Equal(t, 0, Direction{dx: -1}.ChangeX(1))
+    assert.Equal(t, 2, Direction{dx: 1}.ChangeX(1))
+    assert.Equal(t, 1, Direction{dx: 0}.ChangeX(1))
 }
 
 func TestDirectionChangeY(t *testing.T) {
-	assert.Equal(t, 1, Direction{dy: 0}.ChangeY(1))
-	assert.Equal(t, 2, Direction{dy: 1}.ChangeY(1))
-	assert.Equal(t, 0, Direction{dy: -1}.ChangeY(1))
+    assert.Equal(t, 1, Direction{dy: 0}.ChangeY(1))
+    assert.Equal(t, 2, Direction{dy: 1}.ChangeY(1))
+    assert.Equal(t, 0, Direction{dy: -1}.ChangeY(1))
 }
 
 func TestDirectionInverted(t *testing.T) {
-	m := Map{
-		Left:  Direction{name: Left},
-		Right: Direction{name: Right},
-		Up:    Direction{name: Up},
-		Down:  Direction{name: Down},
-	}
-	assert.Equal(t, Direction{name: Right}, m.Inverted(Left))
-	assert.Equal(t, Direction{name: Left}, m.Inverted(Right))
-	assert.Equal(t, Direction{name: Down}, m.Inverted(Up))
-	assert.Equal(t, Direction{name: Up}, m.Inverted(Down))
+    m := Map{
+        Left:  Direction{name: Left},
+        Right: Direction{name: Right},
+        Up:    Direction{name: Up},
+        Down:  Direction{name: Down},
+    }
+    assert.Equal(t, Direction{name: Right}, m.Inverted(Left))
+    assert.Equal(t, Direction{name: Left}, m.Inverted(Right))
+    assert.Equal(t, Direction{name: Down}, m.Inverted(Up))
+    assert.Equal(t, Direction{name: Up}, m.Inverted(Down))
 }
 
 func TestDirectionInvalidInverted(t *testing.T) {
-	m := Map{
-		Left:  Direction{name: Left},
-		Right: Direction{name: Right},
-		Up:    Direction{name: Up},
-		Down:  Direction{name: Down},
-		Stop:  Direction{name: ""},
-	}
-	assert.Equal(t, Direction{name: ""}, m.Inverted("Act"))
-	assert.Equal(t, Direction{name: ""}, m.Inverted(Stop))
+    m := Map{
+        Left:  Direction{name: Left},
+        Right: Direction{name: Right},
+        Up:    Direction{name: Up},
+        Down:  Direction{name: Down},
+        Stop:  Direction{name: ""},
+    }
+    assert.Equal(t, Direction{name: ""}, m.Inverted("Act"))
+    assert.Equal(t, Direction{name: ""}, m.Inverted(Stop))
 }

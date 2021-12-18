@@ -23,117 +23,117 @@
 package mollymage
 
 import (
-	"fmt"
-	"github.com/codenjoyme/codenjoy-go-client/engine"
-	"github.com/stretchr/testify/assert"
-	"testing"
+    "fmt"
+    "github.com/codenjoyme/codenjoy-go-client/engine"
+    "github.com/stretchr/testify/assert"
+    "testing"
 )
 
 func TestGetAtInvalidPoint(t *testing.T) {
-	board := newBoard("###" + "###" + "###")
-	assert.Equal(t, elements["WALL"], board.getAt(engine.NewPoint(-1, -1)))
+    board := newBoard("###" + "###" + "###")
+    assert.Equal(t, elements["WALL"], board.getAt(engine.NewPoint(-1, -1)))
 }
 
 func TestFindHero(t *testing.T) {
-	board := newBoard("#☺#" + "###" + "###")
-	assert.Equal(t, "[1,2]", board.findHero().String())
+    board := newBoard("#☺#" + "###" + "###")
+    assert.Equal(t, "[1,2]", board.findHero().String())
 
-	board = newBoard("###" + "#☻#" + "###")
-	assert.Equal(t, "[1,1]", board.findHero().String())
+    board = newBoard("###" + "#☻#" + "###")
+    assert.Equal(t, "[1,1]", board.findHero().String())
 
-	board = newBoard("###" + "###" + "#Ѡ#")
-	assert.Equal(t, "[1,0]", board.findHero().String())
+    board = newBoard("###" + "###" + "#Ѡ#")
+    assert.Equal(t, "[1,0]", board.findHero().String())
 
-	board = newBoard("Ѡ☺☻" + "###" + "###")
-	assert.Equal(t, "[0,2]", board.findHero().String())
+    board = newBoard("Ѡ☺☻" + "###" + "###")
+    assert.Equal(t, "[0,2]", board.findHero().String())
 }
 
 func TestFindHeroNoResult(t *testing.T) {
-	board := newBoard("###" + "###" + "###")
-	assert.Panics(t, func() { board.findHero() })
+    board := newBoard("###" + "###" + "###")
+    assert.Panics(t, func() { board.findHero() })
 }
 
 func TestIsGameOver(t *testing.T) {
-	board := newBoard("###" + "##☺" + "###")
-	assert.Equal(t, false, board.isGameOver())
+    board := newBoard("###" + "##☺" + "###")
+    assert.Equal(t, false, board.isGameOver())
 
-	board = newBoard("###" + "Ѡ##" + "###")
-	assert.Equal(t, true, board.isGameOver())
+    board = newBoard("###" + "Ѡ##" + "###")
+    assert.Equal(t, true, board.isGameOver())
 }
 
 func TestFindOtherHeroes(t *testing.T) {
-	board := newBoard("#♥#" + "#♠#" + "#♣#")
-	assert.Equal(t, "[[1,0] [1,1] [1,2]]", fmt.Sprintf("%v", board.findOtherHeroes()))
+    board := newBoard("#♥#" + "#♠#" + "#♣#")
+    assert.Equal(t, "[[1,0] [1,1] [1,2]]", fmt.Sprintf("%v", board.findOtherHeroes()))
 }
 
 func TestFindEnemyHeroes(t *testing.T) {
-	board := newBoard("#ö#" + "#Ö#" + "#ø#")
-	assert.Equal(t, "[[1,0] [1,1] [1,2]]", fmt.Sprintf("%v", board.findEnemyHeroes()))
+    board := newBoard("#ö#" + "#Ö#" + "#ø#")
+    assert.Equal(t, "[[1,0] [1,1] [1,2]]", fmt.Sprintf("%v", board.findEnemyHeroes()))
 }
 
 func TestFindBarriers(t *testing.T) {
-	board := newBoard("☼&#" + "123" + "♥♠♣")
-	assert.Equal(t, "[[0,0] [0,1] [0,2] [1,0] [1,1] [1,2] [2,0] [2,1] [2,2]]",
-		fmt.Sprintf("%v", board.findBarriers()))
+    board := newBoard("☼&#" + "123" + "♥♠♣")
+    assert.Equal(t, "[[0,0] [0,1] [0,2] [1,0] [1,1] [1,2] [2,0] [2,1] [2,2]]",
+        fmt.Sprintf("%v", board.findBarriers()))
 }
 
 func TestFindWalls(t *testing.T) {
-	board := newBoard("###" + "☼##" + "☼##")
-	assert.Equal(t, "[[0,0] [0,1]]", fmt.Sprintf("%v", board.findWalls()))
+    board := newBoard("###" + "☼##" + "☼##")
+    assert.Equal(t, "[[0,0] [0,1]]", fmt.Sprintf("%v", board.findWalls()))
 }
 
 func TestFindGhosts(t *testing.T) {
-	board := newBoard("##&" + "##&" + "###")
-	assert.Equal(t, "[[2,1] [2,2]]", fmt.Sprintf("%v", board.findGhosts()))
+    board := newBoard("##&" + "##&" + "###")
+    assert.Equal(t, "[[2,1] [2,2]]", fmt.Sprintf("%v", board.findGhosts()))
 }
 
 func TestFindTreasureBoxes(t *testing.T) {
-	board := newBoard("҉#҉" + "҉҉҉" + "҉#҉")
-	assert.Equal(t, "[[1,0] [1,2]]", fmt.Sprintf("%v", board.findTreasureBoxes()))
+    board := newBoard("҉#҉" + "҉҉҉" + "҉#҉")
+    assert.Equal(t, "[[1,0] [1,2]]", fmt.Sprintf("%v", board.findTreasureBoxes()))
 }
 
 func TestFindPotions(t *testing.T) {
-	board := newBoard("123" + "45#" + "☻♠#")
-	assert.Equal(t, "[[0,0] [0,1] [0,2] [1,0] [1,1] [1,2] [2,2]]",
-		fmt.Sprintf("%v", board.findPotions()))
+    board := newBoard("123" + "45#" + "☻♠#")
+    assert.Equal(t, "[[0,0] [0,1] [0,2] [1,0] [1,1] [1,2] [2,2]]",
+        fmt.Sprintf("%v", board.findPotions()))
 }
 
 func TestFindBlasts(t *testing.T) {
-	board := newBoard("###" + "###" + "##҉")
-	assert.Equal(t, "[[2,0]]", fmt.Sprintf("%v", board.findBlasts()))
+    board := newBoard("###" + "###" + "##҉")
+    assert.Equal(t, "[[2,0]]", fmt.Sprintf("%v", board.findBlasts()))
 }
 
 func TestFindPerks(t *testing.T) {
-	board := newBoard("#cr" + "#i+" + "#TA")
-	assert.Equal(t, "[[1,0] [1,1] [1,2] [2,0] [2,1] [2,2]]", fmt.Sprintf("%v", board.findPerks()))
+    board := newBoard("#cr" + "#i+" + "#TA")
+    assert.Equal(t, "[[1,0] [1,1] [1,2] [2,0] [2,1] [2,2]]", fmt.Sprintf("%v", board.findPerks()))
 }
 
 func TestReport(t *testing.T) {
-	board := newBoard("board=" +
-		"☼☼☼☼☼☼☼☼☼" +
-		"☼1 ♣   ♠☼" +
-		"☼#2  &  ☼" +
-		"☼# 3 ♣ ♠☼" +
-		"☼☺  4   ☼" +
-		"☼   ö H☻☼" +
-		"☼x H ҉҉҉☼" +
-		"☼& &    ☼" +
-		"☼☼☼☼☼☼☼☼☼")
-	assert.Equal(t, "☼☼☼☼☼☼☼☼☼\n"+
-		"☼1 ♣   ♠☼\n"+
-		"☼#2  &  ☼\n"+
-		"☼# 3 ♣ ♠☼\n"+
-		"☼☺  4   ☼\n"+
-		"☼   ö H☻☼\n"+
-		"☼x H ҉҉҉☼\n"+
-		"☼& &    ☼\n"+
-		"☼☼☼☼☼☼☼☼☼\n"+
-		"\n"+
-		"Hero at: [1,4]\n"+
-		"Other heroes at: [[3,7] [5,5] [7,5] [7,7]]\n"+
-		"Enemy heroes at: [[4,3]]\n"+
-		"Ghosts at: [[1,1] [3,1] [5,6]]\n"+
-		"Potions at: [[1,7] [2,6] [3,5] [4,4] [7,3] [7,5] [7,7]]\n"+
-		"Blasts at: [[5,2] [6,2] [7,2]]\n"+
-		"Expected blasts at: [[2,7]]", board.String())
+    board := newBoard("board=" +
+        "☼☼☼☼☼☼☼☼☼" +
+        "☼1 ♣   ♠☼" +
+        "☼#2  &  ☼" +
+        "☼# 3 ♣ ♠☼" +
+        "☼☺  4   ☼" +
+        "☼   ö H☻☼" +
+        "☼x H ҉҉҉☼" +
+        "☼& &    ☼" +
+        "☼☼☼☼☼☼☼☼☼")
+    assert.Equal(t, "☼☼☼☼☼☼☼☼☼\n"+
+        "☼1 ♣   ♠☼\n"+
+        "☼#2  &  ☼\n"+
+        "☼# 3 ♣ ♠☼\n"+
+        "☼☺  4   ☼\n"+
+        "☼   ö H☻☼\n"+
+        "☼x H ҉҉҉☼\n"+
+        "☼& &    ☼\n"+
+        "☼☼☼☼☼☼☼☼☼\n"+
+        "\n"+
+        "Hero at: [1,4]\n"+
+        "Other heroes at: [[3,7] [5,5] [7,5] [7,7]]\n"+
+        "Enemy heroes at: [[4,3]]\n"+
+        "Ghosts at: [[1,1] [3,1] [5,6]]\n"+
+        "Potions at: [[1,7] [2,6] [3,5] [4,4] [7,3] [7,5] [7,7]]\n"+
+        "Blasts at: [[5,2] [6,2] [7,2]]\n"+
+        "Expected blasts at: [[2,7]]", board.String())
 }

@@ -23,35 +23,35 @@
 package sample
 
 import (
-	"fmt"
-	"github.com/codenjoyme/codenjoy-go-client/engine"
-	"github.com/codenjoyme/codenjoy-go-client/engine/direction"
+    "fmt"
+    "github.com/codenjoyme/codenjoy-go-client/engine"
+    "github.com/codenjoyme/codenjoy-go-client/engine/direction"
 )
 
 type Solver struct {
-	directions direction.Map
+    directions direction.Map
 }
 
 func NewSolver() (engine.Solver, error) {
-	d, err := directions()
-	if err != nil {
-		return nil, err
-	}
-	return Solver{
-		directions: d,
-	}, nil
+    d, err := directions()
+    if err != nil {
+        return nil, err
+    }
+    return Solver{
+        directions: d,
+    }, nil
 }
 
 func (s Solver) Answer(message string) string {
-	board := newBoard(message)
-	fmt.Println("Board \n" + board.String())
-	action := s.nextAction(board)
-	fmt.Println("\nAnswer: " + action.String())
-	fmt.Println("-------------------------------------------------------------")
-	return action.String()
+    board := newBoard(message)
+    fmt.Println("Board \n" + board.String())
+    action := s.nextAction(board)
+    fmt.Println("\nAnswer: " + action.String())
+    fmt.Println("-------------------------------------------------------------")
+    return action.String()
 }
 
 func (s Solver) nextAction(b *board) direction.Direction {
-	// TODO: write your code here
-	return s.directions.Get(act)
+    // TODO: write your code here
+    return s.directions.Get(act)
 }

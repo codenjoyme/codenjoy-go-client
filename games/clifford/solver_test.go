@@ -23,20 +23,20 @@
 package clifford
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+    "github.com/stretchr/testify/assert"
+    "testing"
 )
 
 func TestAnswer(t *testing.T) {
-	message := "board=" +
-		"☼☼☼☼☼" +
-		"☼   ☼" +
-		"☼ ► ☼" +
-		"☼   ☼" +
-		"☼☼☼☼☼"
-	s, err := NewSolver()
-	assert.NoError(t, err)
-	if assert.NotNil(t, s) {
-		assert.Equal(t, "RIGHT", s.Answer(message))
-	}
+    message := "board=" +
+        "☼☼☼☼☼" +
+        "☼   ☼" +
+        "☼ ► ☼" +
+        "☼   ☼" +
+        "☼☼☼☼☼"
+    s, err := NewSolver()
+    assert.NoError(t, err)
+    if assert.NotNil(t, s) {
+        assert.Equal(t, "RIGHT", s.Answer(message))
+    }
 }

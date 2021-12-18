@@ -23,95 +23,95 @@
 package sample
 
 import (
-	"fmt"
-	"github.com/codenjoyme/codenjoy-go-client/engine"
-	"github.com/stretchr/testify/assert"
-	"testing"
+    "fmt"
+    "github.com/codenjoyme/codenjoy-go-client/engine"
+    "github.com/stretchr/testify/assert"
+    "testing"
 )
 
 func TestGetAtInvalidPoint(t *testing.T) {
-	board := newBoard("☼☼☼" + "☼☼☼" + "☼☼☼")
-	assert.Equal(t, elements["WALL"], board.getAt(engine.NewPoint(-1, -1)))
+    board := newBoard("☼☼☼" + "☼☼☼" + "☼☼☼")
+    assert.Equal(t, elements["WALL"], board.getAt(engine.NewPoint(-1, -1)))
 }
 
 func TestFindHero(t *testing.T) {
-	board := newBoard("☼☺☼" + "☼☼☼" + "☼☼☼")
-	assert.Equal(t, "[1,2]", board.findHero().String())
+    board := newBoard("☼☺☼" + "☼☼☼" + "☼☼☼")
+    assert.Equal(t, "[1,2]", board.findHero().String())
 
-	board = newBoard("☼☼☼" + "☼☺☼" + "☼☼☼")
-	assert.Equal(t, "[1,1]", board.findHero().String())
+    board = newBoard("☼☼☼" + "☼☺☼" + "☼☼☼")
+    assert.Equal(t, "[1,1]", board.findHero().String())
 
-	board = newBoard("☼☼☼" + "☼☼☼" + "☼X☼")
-	assert.Equal(t, "[1,0]", board.findHero().String())
+    board = newBoard("☼☼☼" + "☼☼☼" + "☼X☼")
+    assert.Equal(t, "[1,0]", board.findHero().String())
 
-	board = newBoard("X☺☻" + "☼☼☼" + "☼☼☼")
-	assert.Equal(t, "[0,2]", board.findHero().String())
+    board = newBoard("X☺☻" + "☼☼☼" + "☼☼☼")
+    assert.Equal(t, "[0,2]", board.findHero().String())
 }
 
 func TestFindHeroNoResult(t *testing.T) {
-	board := newBoard("☼☼☼" + "☼☼☼" + "☼☼☼")
-	assert.Panics(t, func() { board.findHero() })
+    board := newBoard("☼☼☼" + "☼☼☼" + "☼☼☼")
+    assert.Panics(t, func() { board.findHero() })
 }
 
 func TestIsGameOver(t *testing.T) {
-	board := newBoard("☼☼☼" + "☼☼☺" + "☼☼☼")
-	assert.Equal(t, false, board.isGameOver())
+    board := newBoard("☼☼☼" + "☼☼☺" + "☼☼☼")
+    assert.Equal(t, false, board.isGameOver())
 
-	board = newBoard("☼☼☼" + "X☼☼" + "☼☼☼")
-	assert.Equal(t, true, board.isGameOver())
+    board = newBoard("☼☼☼" + "X☼☼" + "☼☼☼")
+    assert.Equal(t, true, board.isGameOver())
 }
 
 func TestFindOtherHeroes(t *testing.T) {
-	board := newBoard("☼☻☼" + "☼Y☼" + "☼☻☼")
-	assert.Equal(t, "[[1,0] [1,1] [1,2]]", fmt.Sprintf("%v", board.findOtherHeroes()))
+    board := newBoard("☼☻☼" + "☼Y☼" + "☼☻☼")
+    assert.Equal(t, "[[1,0] [1,1] [1,2]]", fmt.Sprintf("%v", board.findOtherHeroes()))
 }
 
 func TestFindBarriers(t *testing.T) {
-	board := newBoard("☼☼☼" + "xxx" + "☻☻☻")
-	assert.Equal(t, "[[0,0] [0,1] [0,2] [1,0] [1,1] [1,2] [2,0] [2,1] [2,2]]",
-		fmt.Sprintf("%v", board.findBarriers()))
+    board := newBoard("☼☼☼" + "xxx" + "☻☻☻")
+    assert.Equal(t, "[[0,0] [0,1] [0,2] [1,0] [1,1] [1,2] [2,0] [2,1] [2,2]]",
+        fmt.Sprintf("%v", board.findBarriers()))
 }
 
 func TestFindWalls(t *testing.T) {
-	board := newBoard("   " + "☼  " + "☼  ")
-	assert.Equal(t, "[[0,0] [0,1]]", fmt.Sprintf("%v", board.findWalls()))
+    board := newBoard("   " + "☼  " + "☼  ")
+    assert.Equal(t, "[[0,0] [0,1]]", fmt.Sprintf("%v", board.findWalls()))
 }
 
 func TestFindGold(t *testing.T) {
-	board := newBoard("☼☼$" + "☼☼$" + "☼☼☼")
-	assert.Equal(t, "[[2,1] [2,2]]", fmt.Sprintf("%v", board.findGold()))
+    board := newBoard("☼☼$" + "☼☼$" + "☼☼☼")
+    assert.Equal(t, "[[2,1] [2,2]]", fmt.Sprintf("%v", board.findGold()))
 }
 
 func TestFindBombs(t *testing.T) {
-	board := newBoard("☼☼x" + "☼☼x" + "☼☼☼")
-	assert.Equal(t, "[[2,1] [2,2]]", fmt.Sprintf("%v", board.findBombs()))
+    board := newBoard("☼☼x" + "☼☼x" + "☼☼☼")
+    assert.Equal(t, "[[2,1] [2,2]]", fmt.Sprintf("%v", board.findBombs()))
 }
 
 func TestReport(t *testing.T) {
-	board := newBoard("board=" +
-		"☼☼☼☼☼☼☼☼☼" +
-		"☼ x☺  Y ☼" +
-		"☼  x    ☼" +
-		"☼ $  ☻  ☼" +
-		"☼      x☼" +
-		"☼ ☻     ☼" +
-		"☼       ☼" +
-		"☼ $ ☻ x ☼" +
-		"☼☼☼☼☼☼☼☼☼")
-	assert.Equal(t,
-		/*8*/ "☼☼☼☼☼☼☼☼☼\n"+
-			/*7*/ "☼ x☺  Y ☼\n"+
-			/*6*/ "☼  x    ☼\n"+
-			/*5*/ "☼ $  ☻  ☼\n"+
-			/*4*/ "☼      x☼\n"+
-			/*3*/ "☼ ☻     ☼\n"+
-			/*2*/ "☼       ☼\n"+
-			/*1*/ "☼ $ ☻ x ☼\n"+
-			/*0*/ "☼☼☼☼☼☼☼☼☼\n"+
-			/*012345678*/
-			"\n"+
-			"Hero at: [3,7]\n"+
-			"Other heroes at: [[2,3] [4,1] [5,5] [6,7]]\n"+
-			"Bombs at: [[2,7] [3,6] [6,1] [7,4]]\n"+
-			"Gold at: [[2,1] [2,5]]", board.String())
+    board := newBoard("board=" +
+        "☼☼☼☼☼☼☼☼☼" +
+        "☼ x☺  Y ☼" +
+        "☼  x    ☼" +
+        "☼ $  ☻  ☼" +
+        "☼      x☼" +
+        "☼ ☻     ☼" +
+        "☼       ☼" +
+        "☼ $ ☻ x ☼" +
+        "☼☼☼☼☼☼☼☼☼")
+    assert.Equal(t,
+        /*8*/ "☼☼☼☼☼☼☼☼☼\n"+
+            /*7*/ "☼ x☺  Y ☼\n"+
+            /*6*/ "☼  x    ☼\n"+
+            /*5*/ "☼ $  ☻  ☼\n"+
+            /*4*/ "☼      x☼\n"+
+            /*3*/ "☼ ☻     ☼\n"+
+            /*2*/ "☼       ☼\n"+
+            /*1*/ "☼ $ ☻ x ☼\n"+
+            /*0*/ "☼☼☼☼☼☼☼☼☼\n"+
+            /*012345678*/
+            "\n"+
+            "Hero at: [3,7]\n"+
+            "Other heroes at: [[2,3] [4,1] [5,5] [6,7]]\n"+
+            "Bombs at: [[2,7] [3,6] [6,1] [7,4]]\n"+
+            "Gold at: [[2,1] [2,5]]", board.String())
 }

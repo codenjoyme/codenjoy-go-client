@@ -23,51 +23,51 @@
 package engine
 
 import (
-	"fmt"
+    "fmt"
 )
 
 type Point struct {
-	x, y int
+    x, y int
 }
 
 func NewPoint(x int, y int) *Point {
-	return &Point{x, y}
+    return &Point{x, y}
 }
 
 func (p *Point) X() int {
-	return p.x
+    return p.x
 }
 
 func (p *Point) Y() int {
-	return p.y
+    return p.y
 }
 
 func (p *Point) IsValid(boardSize int) bool {
-	return (p.x >= 0 && p.x < boardSize) && (p.y >= 0 && p.y < boardSize)
+    return (p.x >= 0 && p.x < boardSize) && (p.y >= 0 && p.y < boardSize)
 }
 
 func (p *Point) String() string {
-	return fmt.Sprintf("[%d,%d]", p.x, p.y)
+    return fmt.Sprintf("[%d,%d]", p.x, p.y)
 }
 
 func StepRight(pt *Point) *Point {
-	return NewPoint(pt.X()+1, pt.Y())
+    return NewPoint(pt.X()+1, pt.Y())
 }
 
 func StepLeft(pt *Point) *Point {
-	return NewPoint(pt.X()-1, pt.Y())
+    return NewPoint(pt.X()-1, pt.Y())
 }
 
 func StepUp(pt *Point) *Point {
-	return NewPoint(pt.X(), pt.Y()+1)
+    return NewPoint(pt.X(), pt.Y()+1)
 }
 
 func StepDown(pt *Point) *Point {
-	return NewPoint(pt.X(), pt.Y()-1)
+    return NewPoint(pt.X(), pt.Y()-1)
 }
 
 func (lhs *Point) Equal(rhs *Point) bool {
-	return lhs.X() == rhs.X() && lhs.Y() == rhs.Y()
+    return lhs.X() == rhs.X() && lhs.Y() == rhs.Y()
 }
 
 type SortedPoints []*Point

@@ -25,9 +25,9 @@ package direction
 import "errors"
 
 type Direction struct {
-	name Base
-	dx   int
-	dy   int
+    name Base
+    dx   int
+    dy   int
 }
 
 type Base string
@@ -35,146 +35,146 @@ type Base string
 type Map map[Base]Direction
 
 const (
-	Left  Base = "LEFT"
-	Right Base = "RIGHT"
-	Up    Base = "UP"
-	Down  Base = "DOWN"
-	Stop  Base = "STOP"
+    Left  Base = "LEFT"
+    Right Base = "RIGHT"
+    Up    Base = "UP"
+    Down  Base = "DOWN"
+    Stop  Base = "STOP"
 )
 
 func NewMap(directions ...Direction) (Map, error) {
-	m := make(Map, len(directions))
-	var n Base
-	for _, d := range directions {
-		n = d.name
-		if d.name == Stop {
-			d.name = ""
-		}
-		m[n] = d
-	}
-	if m.valid() {
-		return m, nil
-	}
-	return nil, errors.New("map doesn't contain all required basic directions: Left, Right, Up, Down, Stop")
+    m := make(Map, len(directions))
+    var n Base
+    for _, d := range directions {
+        n = d.name
+        if d.name == Stop {
+            d.name = ""
+        }
+        m[n] = d
+    }
+    if m.valid() {
+        return m, nil
+    }
+    return nil, errors.New("map doesn't contain all required basic directions: Left, Right, Up, Down, Stop")
 }
 
 func New(dx, dy int, name Base) Direction {
-	return Direction{
-		dx:   dx,
-		dy:   dy,
-		name: name,
-	}
+    return Direction{
+        dx:   dx,
+        dy:   dy,
+        name: name,
+    }
 }
 
 func (d Direction) ChangeX(x int) int {
-	return x + d.dx
+    return x + d.dx
 }
 
 func (d Direction) ChangeY(y int) int {
-	return y + d.dy
+    return y + d.dy
 }
 
 func (m Map) Get(name Base) Direction {
-	if m == nil {
-		return Direction{}
-	}
-	return m[name]
+    if m == nil {
+        return Direction{}
+    }
+    return m[name]
 }
 
 func (m Map) Inverted(name Base) Direction {
-	if m == nil {
-		return Direction{}
-	}
-	switch name {
-	case Left:
-		return m[Right]
-	case Right:
-		return m[Left]
-	case Down:
-		return m[Up]
-	case Up:
-		return m[Down]
-	default:
-		return m[Stop]
-	}
+    if m == nil {
+        return Direction{}
+    }
+    switch name {
+    case Left:
+        return m[Right]
+    case Right:
+        return m[Left]
+    case Down:
+        return m[Up]
+    case Up:
+        return m[Down]
+    default:
+        return m[Stop]
+    }
 }
 
 func (m Map) Clockwise(name Base) Direction {
-	if m == nil {
-		return Direction{}
-	}
-	switch name {
-	case Up:
-		return m[Left]
-	case Left:
-		return m[Down]
-	case Down:
-		return m[Right]
-	case Right:
-		return m[Up]
-	default:
-		return m[Stop]
-	}
+    if m == nil {
+        return Direction{}
+    }
+    switch name {
+    case Up:
+        return m[Left]
+    case Left:
+        return m[Down]
+    case Down:
+        return m[Right]
+    case Right:
+        return m[Up]
+    default:
+        return m[Stop]
+    }
 }
 
 func (m Map) ContrClockwise(name Base) Direction {
-	if m == nil {
-		return Direction{}
-	}
-	switch name {
-	case Up:
-		return m[Right]
-	case Right:
-		return m[Down]
-	case Down:
-		return m[Left]
-	case Left:
-		return m[Up]
-	default:
-		return m[Stop]
-	}
+    if m == nil {
+        return Direction{}
+    }
+    switch name {
+    case Up:
+        return m[Right]
+    case Right:
+        return m[Down]
+    case Down:
+        return m[Left]
+    case Left:
+        return m[Up]
+    default:
+        return m[Stop]
+    }
 }
 
 func (m Map) MirrorTopBottom(name Base) Direction {
-	if m == nil {
-		return Direction{}
-	}
-	switch name {
-	case Up:
-		return m[Left]
-	case Right:
-		return m[Down]
-	case Down:
-		return m[Right]
-	case Left:
-		return m[Up]
-	default:
-		return m[Stop]
-	}
+    if m == nil {
+        return Direction{}
+    }
+    switch name {
+    case Up:
+        return m[Left]
+    case Right:
+        return m[Down]
+    case Down:
+        return m[Right]
+    case Left:
+        return m[Up]
+    default:
+        return m[Stop]
+    }
 }
 
 func (m Map) MirrorBottomTop(name Base) Direction {
-	if m == nil {
-		return Direction{}
-	}
-	switch name {
-	case Up:
-		return m[Right]
-	case Right:
-		return m[Up]
-	case Down:
-		return m[Left]
-	case Left:
-		return m[Down]
-	default:
-		return m[Stop]
-	}
+    if m == nil {
+        return Direction{}
+    }
+    switch name {
+    case Up:
+        return m[Right]
+    case Right:
+        return m[Up]
+    case Down:
+        return m[Left]
+    case Left:
+        return m[Down]
+    default:
+        return m[Stop]
+    }
 }
 
 func (m Map) valid() bool {
-	return m[Left].name != "" && m[Right].name != "" && m[Up].name != "" && m[Down].name != ""
+    return m[Left].name != "" && m[Right].name != "" && m[Up].name != "" && m[Down].name != ""
 }
 
 func (d Direction) String() string {
-	return string(d.name)
+    return string(d.name)
 }
