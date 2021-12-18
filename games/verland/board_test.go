@@ -35,11 +35,7 @@ func TestGetAtInvalidPoint(t *testing.T) {
 }
 
 func TestFindHero(t *testing.T) {
-	board := newBoard(
-		/*2*/ "☼♥☼" +
-			/*1*/ "☼☼☼" +
-			/*0*/ "☼☼☼")
-	/*0123*/
+	board := newBoard("☼♥☼" + "☼☼☼" + "☼☼☼")
 	assert.Equal(t, "[1,2]", board.findHero().String())
 
 	board = newBoard("☼☼☼" + "☼♥☼" + "☼☼☼")

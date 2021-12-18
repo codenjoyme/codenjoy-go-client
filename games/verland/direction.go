@@ -37,11 +37,11 @@ const (
 
 func directions() (direction.Map, error) {
 	return direction.NewMap(
-		direction.New(0, -1, 0, left), // move
-		direction.New(1, 1, 0, right), // move
-		direction.New(2, 0, -1, up),   // move
-		direction.New(3, 0, 1, down),  // move
-		direction.New(6, 0, 0, stop),  // stay
-		direction.New(5, 0, 0, cure),  // cure
+		direction.New(-1, 0, left), // move
+		direction.New(1, 0, right), // move
+		direction.New(0, -1, up),   // move
+		direction.New(0, 1, down),  // move
+		direction.New(0, 0, stop),  // stay
+		direction.New(0, 0, cure),  // cure
 	)
 }
