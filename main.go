@@ -6,6 +6,7 @@ import (
 	"github.com/codenjoyme/codenjoy-go-client/games/clifford"
 	"github.com/codenjoyme/codenjoy-go-client/games/mollymage"
 	"github.com/codenjoyme/codenjoy-go-client/games/sample"
+	"github.com/codenjoyme/codenjoy-go-client/games/verland"
 	"log"
 	"os"
 	"fmt"
@@ -44,6 +45,8 @@ func gameSolver(game string) (engine.Solver, error) {
 		return mollymage.NewSolver()
 	case "clifford":
 		return clifford.NewSolver()
+	case "verland":
+		return verland.NewSolver()
 	default:
 		return nil, errors.New("unable to determine game type")
 	}
