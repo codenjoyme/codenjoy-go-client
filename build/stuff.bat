@@ -54,10 +54,10 @@ call %RUN% :init_colors
     goto :eof
 
 :test    
-    call %RUN% :eval_echo ‘%GO% test %ROOT%\...‘
+    call %RUN% :eval_echo ‘%GO% test .\...‘
     echo.
     goto :eof
 
 :run
-    call %RUN% :eval_echo ‘%GO% run %ROOT%\main.go %GAME_TO_RUN% %SERVER_URL%‘
+    call %RUN% :eval_echo ‘%GO% run .\main.go %GAME_TO_RUN% %SERVER_URL%‘
     goto :eof
