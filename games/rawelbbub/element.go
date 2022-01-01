@@ -20,7 +20,7 @@
  * #L%
  */
 
-package battlecity
+package rawelbbub
 
 var elements = map[string]rune{
 
