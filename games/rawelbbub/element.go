@@ -26,11 +26,11 @@ var elements = map[string]rune{
 
         // An empty space where hero can move.
 
-    "NONE": ' ',
+    "WATER": ' ',
 
-        // The undestroyable wall.
+        // Underwater reefs. They cannot be destroyed.
 
-    "BATTLE_WALL": '☼',
+    "REEFS": '☼',
 
         // A destroyed hero. A new appears just in a second.
 
@@ -214,7 +214,7 @@ var elements = map[string]rune{
     "PRIZE_WALKING_ON_WATER": '3',
 
         // A prize that allows the hero to temporarily see all enemies
-        // under the trees.
+        // under the trees and their bullets.
 
     "PRIZE_VISIBILITY": '4',
 
