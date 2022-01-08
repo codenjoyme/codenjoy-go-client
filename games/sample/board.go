@@ -50,7 +50,7 @@ func (b *board) getAt(pt *engine.Point) rune {
 func (b *board) findHero() *engine.Point {
     points := b.board.Find(
         elements["HERO"],
-        elements["DEAD_HERO"])
+        elements["HERO_DEAD"])
 
     if len(points) == 0 {
         panic("Hero element has not been found")
@@ -65,7 +65,7 @@ func (b *board) isGameOver() bool {
 func (b *board) findOtherHeroes() []*engine.Point {
     return b.board.Find(
         elements["OTHER_HERO"],
-        elements["OTHER_DEAD_HERO"])
+        elements["OTHER_HERO_DEAD"])
 }
 
 func (b *board) findBarriers() []*engine.Point {
