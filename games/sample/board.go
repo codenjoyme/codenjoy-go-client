@@ -59,7 +59,7 @@ func (b *board) findHero() *engine.Point {
 }
 
 func (b *board) isGameOver() bool {
-    return len(b.board.Find(elements["DEAD_HERO"])) != 0
+    return len(b.board.Find(elements["HERO_DEAD"])) != 0
 }
 
 func (b *board) findOtherHeroes() []*engine.Point {
