@@ -52,8 +52,8 @@ func (b *board) getAt(pt *engine.Point) rune {
 func (b *board) findHero() *engine.Point {
     points := b.board.Find(
         elements["HERO"],
-        elements["POTION_HERO"],
-        elements["DEAD_HERO"])
+        elements["HERO_POTION"],
+        elements["HERO_DEAD"])
     if len(points) == 0 {
         panic("Hero element has not been found")
     }
@@ -61,21 +61,21 @@ func (b *board) findHero() *engine.Point {
 }
 
 func (b *board) isGameOver() bool {
-    return len(b.board.Find(elements["DEAD_HERO"])) != 0
+    return len(b.board.Find(elements["HERO_DEAD"])) != 0
 }
 
 func (b *board) findOtherHeroes() []*engine.Point {
     return b.board.Find(
         elements["OTHER_HERO"],
-        elements["OTHER_POTION_HERO"],
-        elements["OTHER_DEAD_HERO"])
+        elements["OTHER_HERO_POTION"],
+        elements["OTHER_HERO_DEAD"])
 }
 
 func (b *board) findEnemyHeroes() []*engine.Point {
     return b.board.Find(
         elements["ENEMY_HERO"],
-        elements["ENEMY_POTION_HERO"],
-        elements["ENEMY_DEAD_HERO"])
+        elements["ENEMY_HERO_POTION"],
+        elements["ENEMY_HERO_DEAD"])
 }
 
 func (b *board) findBarriers() []*engine.Point {
@@ -109,9 +109,9 @@ func (b *board) findPotions() []*engine.Point {
         elements["POTION_TIMER_3"],
         elements["POTION_TIMER_4"],
         elements["POTION_TIMER_5"],
-        elements["POTION_HERO"],
-        elements["OTHER_POTION_HERO"],
-        elements["ENEMY_POTION_HERO"])
+        elements["HERO_POTION"],
+        elements["OTHER_HERO_POTION"],
+        elements["ENEMY_HERO_POTION"])
 }
 
 func (b *board) findBlasts() []*engine.Point {
