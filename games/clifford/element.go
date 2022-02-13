@@ -340,4 +340,8 @@ var elements = map[string]rune{
 
     "MASK_POTION": 'm',
 
+        // Ammo clip - additional ammo for hero's gun
+
+    "AMMO_CLIP": 'Ѧ',
+
 }
