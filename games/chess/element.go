@@ -24,11 +24,11 @@ package chess
 
 var elements = map[string]rune{
 
-        // .
+        // Поле.
 
     "SQUARE": '.',
 
-        // .
+        // Препятствие для фигур.
 
     "BARRIER": ' ',
 
@@ -128,7 +128,7 @@ var elements = map[string]rune{
 
     "BLUE_PAWN": 'z',
 
-        // Системный спрайт - изображение шахматной доски.
+        // Изображение шахматной доски (фон).
 
     "BACKGROUND": '-',
 
