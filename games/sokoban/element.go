@@ -24,7 +24,7 @@ package sokoban
 
 var elements = map[string]rune{
 
-        // Emty space.
+        // Empty space.
 
     "NONE": ' ',
 
