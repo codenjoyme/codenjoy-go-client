@@ -36,10 +36,6 @@ var elements = map[string]rune{
 
     "START_FLOOR": '#',
 
-        // .
-
-    "OTHER": '?',
-
         // Apple.
 
     "APPLE": '○',
