@@ -36,9 +36,9 @@ var elements = map[string]rune{
 
     "START_SPOT": '#',
 
-        // Apple.
+        // Blueberry.
 
-    "APPLE": '○',
+    "BLUEBERRY": '○',
 
         // Stone.
 
