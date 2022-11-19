@@ -40,9 +40,9 @@ var elements = map[string]rune{
 
     "BLUEBERRY": '○',
 
-        // Stone.
+        // Acorn.
 
-    "STONE": '●',
+    "ACORN": '●',
 
         // Flying pill/Angel's wings.
 
