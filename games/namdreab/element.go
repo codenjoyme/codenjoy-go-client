@@ -28,9 +28,9 @@ var elements = map[string]rune{
 
     "NONE": ' ',
 
-        // Impenetrable wall.
+        // Impenetrable rock.
 
-    "WALL": '☼',
+    "ROCK": '☼',
 
         // Respawn point from which the hero starts its movement.
 
